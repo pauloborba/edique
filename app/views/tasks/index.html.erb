@@ -1,5 +1,41 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Project</h1>
+
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @project.description %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @project.start_date %>
+</p>
+
+<p>
+  <strong>Final date:</strong>
+  <%= @project.final_date %>
+</p>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
+
+
+<h1>Users</h1>
+ <ul>
+  <% @users.each do |user| %>
+    <li>
+    <%= link_to user.first_name ? user.first_name : user.cpf, project_add_member_path(@project,user), method: :post %>
+    <%= user.projects.exists?(@project) ? 'Associado ao projeto' : 'Não associado ao projeto' %>
+    </li>
+  <% end %>
+</ul>
+
 <h1>Tasks</h1>
 
 <table>
@@ -20,9 +56,9 @@
         <td><%= task.description %></td>
         <td><%= task.final_date %></td>
         <td><%= task.task_report %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', project_task_path(@project, task) %></td>
+        <td><%= link_to 'Edit', edit_project_task_path(@project, task) %></td>
+        <td><%= link_to 'Destroy', [@project, task], confirm: 'Are you sure?', method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +66,4 @@
 
 <br>
 
-<%= link_to 'New Task', new_task_path %>
+<%= link_to 'New Task', new_project_task_path(@project) %>

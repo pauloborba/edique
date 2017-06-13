@@ -20,5 +20,21 @@
   <%= @task.task_report %>
 </p>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<%= link_to 'Edit', edit_project_task_path(@project, @task) %> |
+<%= link_to 'Back', project_tasks_path(@project) %>
+
+
+
+
+<h1>Users</h1>
+
+
+ <ul>
+  <% @users.each do |user| next if !user.projects.exists?(@project) %>
+	    <li>
+	    <%= link_to user.first_name ? user.first_name : user.cpf, project_task_add_member_path(@project, @task, user), method: :post %>
+	    <%= user.tasks.exists?(@task) ? 'Faz parte' : 'Nao faz parte'%>
+	    </li>
+  <% end %>
+</ul>
+

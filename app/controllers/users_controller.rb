@@ -1,19 +1,26 @@
 class UsersController < ApplicationController
+  skip_before_action :authenticate_user, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin, only: [:new, :edit, :create, :destroy]
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @page_name = "Ediquê - Usuários"
+    @users = User.order('first_name ASC, last_name ASC')
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    @page_name = "Ediquê - #{@user.full_name}"
+    @current_projects = @user.projects.not_finished
+    @past_projects = @user.projects.finished
   end
 
   # GET /users/new
   def new
+    @page_name = "Ediquê - Criar usuário"
     @user = User.new
   end
 
@@ -24,7 +31,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    @user = User.create(user_params)
 
     respond_to do |format|
       if @user.save
@@ -69,6 +76,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:cpf, :first_name, :last_name, :email)
+      params.require(:user).permit(:cpf, :first_name, :last_name, :admin, :email, :password, :password_confirmation)
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170519141558) do
+ActiveRecord::Schema.define(version: 20170613002004) do
 
   create_table "participations", force: :cascade do |t|
     t.integer  "user_id"
@@ -30,13 +30,27 @@ ActiveRecord::Schema.define(version: 20170519141558) do
     t.index ["user_id"], name: "index_participations_users_on_user_id"
   end
 
+  create_table "post_attachments", force: :cascade do |t|
+    t.integer  "post_id"
+    t.string   "avatar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.date     "start_date"
     t.date     "final_date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "finished",    default: false
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -44,9 +58,10 @@ ActiveRecord::Schema.define(version: 20170519141558) do
     t.string   "description"
     t.date     "final_date"
     t.string   "task_report"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "project_id"
+    t.boolean  "completed",   default: false
     t.index ["project_id"], name: "index_tasks_on_project_id"
   end
 
@@ -55,8 +70,10 @@ ActiveRecord::Schema.define(version: 20170519141558) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "password_digest"
+    t.boolean  "admin",           default: false
   end
 
 end
