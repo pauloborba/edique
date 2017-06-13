@@ -1,44 +1,32 @@
-Given(/^O projeto "([^"]*)" possui uma atividade "([^"]*)"$/) do |project_name, task_name|
+@tasks = []
 
-  param_proj = {project: {name: project_name}}
-  post '/projects', param_proj
-  visit '/projects'
-  page.should have_content project_name
-
-  param_task = {task: {name: task_name}}
-  post '/tasks', param_task
-  belongs_to :project
-  visit '/tasks'
-  page.should have_content task_name
-
+Given(/^possui uma atividade "([^"]*)" no projeto "([^"]*)"$/) do |task_name, project_name|
+  proj = Project.find_by_name(project_name)
+  task = create_new_task(task_name, true, nil)
+  add_task_to_proj(task, proj)
 end
 
 Given(/^a atividade "([^"]*)" não possui responsável$/) do |task_name|
-  param_proj = {project: {name: project_name}}
-
+  task = Task.find_by_name(task_name)
+  if(task.users.exists?)
+    throw("A nova atividade contém usuários já alocados")
+  end
 end
 
-
-Given(/^o usuário "([^"]*)" é membro do projeto "([^"]*)"$/) do |user_name, project_name|
-
-
-end
-
-Given(/^"([^"]*)" está cadastrado no sistema$/) do |user_name|
-
-  param_user = {user: {first_name: user_name.split(" ").first, last_name: user_name.split(" ").last}}
-  post '/users', param_user
-  visit '/users'
-  page.should have_content user
-
-end
 
 When(/^eu adiciono "([^"]*)" como responsável da atividade "([^"]*)"$/) do |user_name, task_name|
+  user = create_user(user_name)
+  task = Task.find_by_name(task_name)
 
-
+  add_user_to_task(user, task)
 end
 
 Then(/^a atividade "([^"]*)" tem "([^"]*)" como responsável$/) do |task_name, user_name|
+  user = User.find_by_first_name(user_name.split(" ").first)
+  task = Task.find_by_name(task_name)
 
+  if !task.users.exists?(user.id)
+    throw("Erro")
+  end
 
 end

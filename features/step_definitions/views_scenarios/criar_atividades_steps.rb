@@ -17,7 +17,11 @@ When(/^eu crio a atividade "([^"]*)"$/) do |task_name|
 end
 
 Then(/^eu vejo a atividade "([^"]*) sem nenhum responsável alocado$/) do |task_name|
+#  task = Task.find_by_name(task_name)
 
+#  if(task.users.exists?)
+#    throw("A nova atividade contém usuários já alocados")
+#  end
 end
 
 
