@@ -7,6 +7,7 @@ Given(/^eu vejo o usuário “([^“”]*)”  de email “([^“”]*)” na p�
   page.should have_content email_user
 end
 
+
 When(/^eu seleciono a opção de cadastrar novo usuário$/) do
   click_on("New User")
 end
