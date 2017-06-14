@@ -188,7 +188,7 @@
 					<div class="row">
 						<input type="hidden" name="_method" value="patch">
 						<input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %>>
-						<div class="col-md-12">
+						<div class="col-md-6">
 							<div class="form-group form-group-lg label-floating">
 								<label for="edit-task[name]" class="control-label">Título da Atividade</label>
 								<input type="text" class="form-control" id="task-name-input" name="task[name]">
@@ -198,9 +198,6 @@
 								<label for="task[description]" class="control-label">Descrição</label>
 								<textarea id="task-description-input" name="task[description]" class="form-control"></textarea>
 							</div>
-						</div>
-
-						<div class="col-md-6">
 
 							<div class="form-group form-group-lg">
 								<% @project.users.each do |member|%>
@@ -212,14 +209,27 @@
 									</div>
 								<% end %> 
 							</div>
-						</div>
-
-						<div class="col-md-6">
 
 							<div class="form-group form-group-lg">
 								<label for="task[final_date]" class="control-label">Data Inicial</label>
 								<input type="date" class="form-control" id="task-date-input" name="task[final_date]">
 							</div>
+
+						</div>
+
+						<div class="col-md-6">
+							<div class="col-md-6">
+							<div class="form-group form-group-lg label-floating">
+								<label for="task[task_report]" class="control-label">Relatório</label>
+								<textarea id="task-relat-input" name="task[task_report]" class="form-control" style="height:400px;"></textarea>
+								<!-- <input type="text" cols="40" rows="5" style=" height:400px;" class="form-control" id="task-relat-input" name="task[report]"> -->
+							</div>
+							
+						</div>
+
+						<div class="col-md-6">
+
+							
 						</div>
 					</div>
 				</div>
@@ -343,7 +353,7 @@
 
 		var descElem = $("#task-description-input");
 		descElem.parent().removeClass('is-empty');
-		descElem.val(taskName);
+		descElem.val(task["description"]);
 
 		var membersIDs = [];
 		for (var i=0; i<task["users"].length; i++){
@@ -363,6 +373,10 @@
 		var nameElem = $("#task-date-input");
 		nameElem.parent().removeClass('is-empty');
 		nameElem.val(task["final_date"]);
+
+		var nameElem = $("#task-relat-input");
+		nameElem.parent().removeClass('is-empty');
+		nameElem.val(task["task_report"]);
 	}
 
 </script>

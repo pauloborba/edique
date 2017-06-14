@@ -18,15 +18,33 @@ When(/^eu adiciono "([^"]*)" como responsável da atividade "([^"]*)"$/) do |use
   user = create_user(user_name)
   task = Task.find_by_name(task_name)
 
-  add_user_to_task(user, task)
+  task.users << user
+  task.save
 end
 
 Then(/^a atividade "([^"]*)" tem "([^"]*)" como responsável$/) do |task_name, user_name|
   user = User.find_by_first_name(user_name.split(" ").first)
   task = Task.find_by_name(task_name)
 
-  if !task.users.exists?(user.id)
+  if !user.tasks.exists?(task.id)
     throw("Erro")
   end
 
+end
+
+Then(/^a atividade "([^"]*)" mantém "([^"]*)" como responsável$/) do |task_name, user_name|
+  user = User.find_by_first_name(user_name.split(" ").first)
+  task = Task.find_by_name(task_name)
+
+  if !user.tasks.exists?(task.id)
+    throw("Erro")
+  end
+
+end
+
+Given(/^a atividade "([^"]*)" possui o responsável "([^"]*)"$/) do |task_name, user_name|
+  user = User.find_by_first_name(user_name.split(" ").first)
+  task = Task.find_by_name(task_name)
+
+  add_user_to_task(user, task)
 end
