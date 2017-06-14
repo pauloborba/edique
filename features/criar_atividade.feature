@@ -8,13 +8,14 @@ Feature: Criar atividades
 		When eu crio a atividade "Preparar palestra" no projeto "Educação política para mafagafos"
 		Then a atividade "Preparar palestra" não tem nenhum responsável alocado
 
+    @ignore
     Scenario: Atividades sem membros alocados sempre que forem criadas (GUI)
 		Given Eu vejo o projeto "Educação política para mafagafos" com data de entrega "05/07/2017"
         When eu entro na tela do projeto "Educação política para mafagafos"
 		And eu crio a atividade "Preparar palestra"
 		Then eu vejo a atividade "Preparar palestra” sem nenhum responsável alocado
 
-    @ignore
+
     Scenario: Restringir alocação na atividade para membros que fazem parte do projeto que contém a atividade (Sistema)
         Given O sistema tem o projeto "Educação política para mafagafos" com data de entrega "02/07/2017"
         And tem o usuário "Alfredo José" no projeto "Educação política para mafagafos"
