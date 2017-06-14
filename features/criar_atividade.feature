@@ -8,8 +8,7 @@ Feature: Criar atividades
 		When eu crio a atividade "Preparar palestra" no projeto "Educação política para mafagafos"
 		Then a atividade "Preparar palestra" não tem nenhum responsável alocado
 
-  @ignore
-  Scenario: Atividades sem membros alocados sempre que forem criadas (GUI)
+    Scenario: Atividades sem membros alocados sempre que forem criadas (GUI)
 		Given Eu vejo o projeto "Educação política para mafagafos" com data de entrega "05/07/2017"
         When eu entro na tela do projeto "Educação política para mafagafos"
 		And eu crio a atividade "Preparar palestra"

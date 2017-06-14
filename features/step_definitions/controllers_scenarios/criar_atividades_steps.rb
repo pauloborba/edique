@@ -28,9 +28,14 @@ Given(/^tem o usuário "([^"]*)" sem nenhum projeto alocado$/) do |user_name|
   create_user(user_name)
 end
 
+
+
 Then(/^a atividade "([^"]*)" tem "([^"]*)" na lista de alocáveis na atividade$/) do |task_name, user_name|
   task = Task.find_by_name(task_name)
   user = create_user(user_name)
+
+
+
 
 
   if !task.users.exists?(user.id)
