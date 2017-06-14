@@ -21,6 +21,7 @@ Feature: parking space reminder
 		Then a atividade "Preparar palestra" mantém "Robertson Novelino" como responsável
 		#And a atividade "Preparar palestra" tem "Alfredo Alberto" como responsável
 
+  @ignore
  	Scenario: Scenario: Adicionar responsável a atividade (GUI)
    		Given Eu vejo o projeto "Educação política para mafagafos" com data de entrega "30/06/2017"
         And eu vejo uma atividade "Preparar palestra" no projeto "Educação política para mafagafos"
