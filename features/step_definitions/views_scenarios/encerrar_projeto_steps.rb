@@ -23,3 +23,7 @@ end
 Then(/^o projeto "([^"]*)" não é exibido na lista de projetos$/) do |project_name|
 	page.should have_no_content(project_name)
 end
+
+Then(/^eu não devo ver o botão de "([^"]*)"$/) do |button_name|
+	page.should have_no_content(button_name)
+end
