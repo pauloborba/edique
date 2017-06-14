@@ -3,13 +3,11 @@ Feature: Criar um novo usuário
 	I want to criar um novo usuário no sistema
 	So that possa ter acesso ao sistema
 
-	@ignore
 	Scenario: Cadastrar um usuário repetido no sistema
 		Given o usuário “Dantas Barreto” com email “dantinhas22@hotmail.com” está cadastrado no sistema
 		When eu cadastro o usuário “Dantas Barreto” com email “dantinhas22@hotmail.com”
 		Then o sistema não cadastra o usuário “Dantas Barreto” com email “dantinhas22@hotmail.com”
 
-	@ignore
 	Scenario: Cadastrar um usuário repetido no sistema (GUI)
 		Given eu vejo o usuário “Dantas Barreto”  de email “dantinhas22@hotmail.com” na página de usuários cadastrados no sistema
 		When eu seleciono a opção de cadastrar novo usuário

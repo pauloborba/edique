@@ -5,16 +5,16 @@ Feature: parking space reminder
 
 	@ignore
  	Scenario: Adicionar responsável a atividade ociosa (Sistema)
-   		Given O projeto "Educação política para mafagafos" possui uma atividade "Preparar palestra"
+		Given O sistema tem o projeto "Educação política para mafagafos" com data de entrega "30/06/2017"
+		And possui uma atividade "Preparar palestra" no projeto "Educação política para mafagafos"
 		And a atividade "Preparar palestra" não possui responsável
-		And o usuário "Robertson Novelino" é membro do projeto "Educação política para mafagafos"
-		And "Robertson" está cadastrado no sistema
+		And tem o usuário "Roberteson Novelino" no projeto "Educação política para mafagafos"
 		When eu adiciono "Robertson Novelino" como responsável da atividade "Preparar palestra"
 		Then a atividade "Preparar palestra" tem "Robertson Novelino" como responsável
 
 	@ignore
  	Scenario: Adicionar mais de um responsável a uma atividade (Sistema)
-   		Given O projeto "Educação política para mafagafos" possui uma atividade "Preparar palestra"
+   		Given O projeto "Educação política para mafagafos" possui uma atividade "Preparar palestra" com data de entrega "05/07/2017"
 		And o usuário "Robertson" é membro do projeto "Educação política para mafagafos"
 		And o usuário "Mariana" é membro do projeto "Educação política para mafagafos"
 		And a atividade "Preparar palestra" possui o responsável “Robertson”
