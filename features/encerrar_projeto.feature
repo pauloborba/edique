@@ -11,3 +11,15 @@ Feature: Encerrar projeto
 		Then devo ver a tela com a lista de projetos
 		And eu devo ver a mensagem de que o projeto foi arquivado
 		And o projeto "Ouvir toda a discografia de Pink Floyd" não é exibido na lista de projetos
+
+	Scenario: Encerrar um projeto em andamento (sistema)
+		Given o projeto "Ouvir toda a discografia de Pink Floyd" existe no sistema
+		And o projeto "Ouvir toda a discografia de Pink Floyd" não está concluído
+		When eu tento concluir o projeto "Ouvir toda a discografia de Pink Floyd"
+		Then o projeto "Ouvir toda a discografia de Pink Floyd" deve estar concluído
+
+	Scenario: Encerrar um projeto já encerrado (sistema)
+		Given o projeto "Ouvir toda a discografia de Pink Floyd" existe no sistema
+		And o projeto "Ouvir toda a discografia de Pink Floyd" está concluído
+		When eu tento concluir o projeto "Ouvir toda a discografia de Pink Floyd"
+		Then o projeto "Ouvir toda a discografia de Pink Floyd" deve estar concluído
